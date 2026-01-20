@@ -5,7 +5,7 @@ echo "🛑 Parando Servidores Hytale (Lobby & SkyWars)"
 echo "========================================="
 
 # Encontrar e matar todos os processos HytaleServer
-PIDS=$(ps aux | grep HytaleServer. jar | grep -v grep | awk '{print $2}')
+PIDS=$(ps aux | grep HytaleServer.jar | grep -v grep | awk '{print $2}')
 
 if [ -z "$PIDS" ]; then
     echo "ℹ️  Nenhum servidor Hytale em execução"
