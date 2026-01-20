@@ -1,0 +1,69 @@
+# ============================================
+# Hytale Server - Git Ignore
+# ============================================
+
+# Assets (muito grande - 3GB+)
+**/Assets. zip
+shared/Assets.zip
+
+# Arquivos executáveis do servidor
+**/Server/
+Server/
+**/HytaleServer.jar
+
+# Cache e arquivos temporários
+**/.cache/
+. cache/
+**/HytaleServer.aot
+*. aot
+
+# Dados do mundo e jogadores (não commitar saves)
+**/universe/
+universe/
+
+# Logs
+**/logs/
+logs/
+*. log
+
+# Configurações com dados sensíveis
+**/config. json
+config.json
+**/bans.json
+**/whitelist.json
+**/permissions.json
+
+# Backups
+**/backups/
+backups/
+*. backup
+
+# Mods baixados (usuário deve baixar)
+**/mods/*.jar
+**/mods/*.zip
+# Mas mantém a pasta mods/
+!**/mods/. gitkeep
+
+# Sistema Operacional
+. DS_Store
+Thumbs.db
+desktop.ini
+
+# IDEs
+.idea/
+. vscode/
+*.iml
+*.iws
+*. ipr
+
+# Java
+*.class
+*.jar
+! gradle-wrapper.jar
+target/
+build/
+
+# Variáveis de ambiente
+.env
+.env.local
+

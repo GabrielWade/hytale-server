@@ -1,0 +1,19 @@
+{
+  "ServerName": "Hytale Minigames MVP",
+  "MOTD": "Bem-vindo ao servidor de minigames! ",
+  "MaxPlayers": 100,
+  "DefaultWorld": "world",
+  "ViewDistance": 12,
+  "Whitelist": false,
+  "OnlineMode": true,
+  "Ports": {
+    "lobby": 5520,
+    "spleef": 5521,
+    "parkour": 5522
+  },
+  "Memory": {
+    "lobby": "2G",
+    "minigames": "1G"
+  }
+}
+
