@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "========================================="
-echo "🛑 Parando Todos os Servidores Hytale"
+echo "🛑 Parando Servidores Hytale (Lobby & SkyWars)"
 echo "========================================="
 
 # Encontrar e matar todos os processos HytaleServer

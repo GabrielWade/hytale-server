@@ -1,6 +1,6 @@
-# 🎮 Hytale Minigames Server MVP
+# 🎮 Hytale Minigames Server
 
-Servidor Hytale com arquitetura multi-servidor escalável para minigames. 
+Servidor Hytale com arquitetura multi-servidor escalável para minigames.
 
 ## 📋 Arquitetura
 
@@ -10,9 +10,8 @@ Servidor Hytale com arquitetura multi-servidor escalável para minigames.
 │  (Gateway)  │
 └──────┬──────┘
        │
-       ├─────► Minigame:  Spleef (Porta 5521)
-       ├─────► Minigame: Parkour (Porta 5522)
-       └─────► Minigame: N (Escalável)
+       ├─────► Minigame:  SkyWars (Porta 5521)
+       └─────► Minigame:  N (Escalável)
 ```
 
 ## 🚀 Requisitos
@@ -27,8 +26,8 @@ Servidor Hytale com arquitetura multi-servidor escalável para minigames.
 ### 1. Clonar o repositório
 
 ```bash
-git clone https://github.com/SEU_USUARIO/hytale-minigames-server.git
-cd hytale-minigames-server
+git clone https://github.com/GabrielWade/hytale-server.git
+cd hytale-server
 ```
 
 ### 2. Baixar arquivos do servidor
@@ -44,8 +43,7 @@ cp "$HYTALE_PATH/Assets.zip" shared/
 
 # Copiar Server para cada servidor
 cp -r "$HYTALE_PATH/Server" lobby/
-cp -r "$HYTALE_PATH/Server" minigame-spleef/
-cp -r "$HYTALE_PATH/Server" minigame-parkour/
+cp -r "$HYTALE_PATH/Server" minigame-skywars/
 ```
 
 **Alternativa:** Use o [Hytale Downloader CLI](https://hypixel.com/docs/hytale-server-manual#server-files)
@@ -53,9 +51,8 @@ cp -r "$HYTALE_PATH/Server" minigame-parkour/
 ### 3. Configurar permissões
 
 ```bash
-chmod +x lobby/start-lobby.sh
-chmod +x minigame-spleef/start-spleef.sh
-chmod +x minigame-parkour/start-parkour.sh
+chmod +x lobby/start-lobby. sh
+chmod +x minigame-skywars/start-skywars.sh
 chmod +x scripts/start-all.sh
 chmod +x scripts/stop-all. sh
 ```
@@ -64,8 +61,7 @@ chmod +x scripts/stop-all. sh
 
 ```bash
 sudo ufw allow 5520/udp comment "Hytale Lobby"
-sudo ufw allow 5521/udp comment "Hytale Spleef"
-sudo ufw allow 5522/udp comment "Hytale Parkour"
+sudo ufw allow 5521/udp comment "Hytale SkyWars"
 ```
 
 ## 🎯 Uso
@@ -82,43 +78,46 @@ sudo ufw allow 5522/udp comment "Hytale Parkour"
 # Lobby
 ./lobby/start-lobby.sh
 
-# Spleef
-./minigame-spleef/start-spleef.sh
+# SkyWars
+./minigame-skywars/start-skywars.sh
+```
 
-# Parkour
-./minigame-parkour/start-parkour. sh
+### Parar todos os servidores
+
+```bash
+./scripts/stop-all.sh
 ```
 
 ### Autenticar servidores
 
-Na primeira execução, cada servidor precisa ser autenticado: 
+Na primeira execução, cada servidor precisa ser autenticado:
 
 1. Execute o servidor
 2. No console, digite: `/auth login device`
-3. Visite:  `https://accounts.hytale.com/device`
+3. Visite: `https://accounts.hytale.com/device`
 4. Insira o código mostrado
 5. Autorize com sua conta Hytale
+
+**Importante:** Você pode autenticar até 100 servidores por licença do Hytale.
 
 ## 📂 Estrutura do Projeto
 
 ```
-hytale-minigames/
+hytale-server/
 ├── lobby/                    # Servidor de entrada (Gateway)
 │   ├── Server/              # Binários do servidor Hytale
 │   ├── mods/                # Mods do lobby
+│   ├── universe/            # Mundo e dados dos jogadores
+│   ├── logs/                # Logs do servidor
 │   ├── start-lobby.sh       # Script de inicialização
 │   └── config.json          # (Gerado automaticamente)
 │
-├── minigame-spleef/         # Minigame: Spleef
+├── minigame-skywars/        # Minigame: SkyWars
 │   ├── Server/
 │   ├── mods/
-│   ├── start-spleef.sh
-│   └── config.json
-│
-├── minigame-parkour/        # Minigame: Parkour
-│   ├── Server/
-│   ├── mods/
-│   ├── start-parkour.sh
+│   ├── universe/
+│   ├── logs/
+│   ├── start-skywars.sh
 │   └── config.json
 │
 ├── shared/                   # Recursos compartilhados
@@ -128,40 +127,49 @@ hytale-minigames/
 │   ├── start-all.sh         # Inicia todos os servidores
 │   └── stop-all.sh          # Para todos os servidores
 │
+├── config.example.json       # Exemplo de configuração
 ├── . gitignore
-└── README.md
+└── README. md
 ```
 
 ## 🔧 Configuração
 
 ### Portas dos Servidores
 
-| Servidor | Porta | Uso |
-|----------|-------|-----|
-| Lobby | 5520 | Entrada principal |
-| Spleef | 5521 | Minigame 1 |
-| Parkour | 5522 | Minigame 2 |
+| Servidor | Porta | Uso              |
+|----------|-------|------------------|
+| Lobby    | 5520  | Entrada principal|
+| SkyWars  | 5521  | Minigame         |
 
 ### Memória Alocada
 
 - **Lobby:** 2GB (`-Xmx2G -Xms2G`)
-- **Minigames:** 1GB (`-Xmx1G -Xms1G`)
+- **SkyWars:** 1GB (`-Xmx1G -Xms1G`)
 
 Ajuste conforme necessário nos scripts `.sh`
+
+### Configuração Avançada
+
+Copie o arquivo de exemplo e ajuste conforme necessário:
+
+```bash
+cp config.example.json config. json
+nano config.json
+```
 
 ## 🛠️ Desenvolvimento
 
 ### Adicionar um novo minigame
 
-1. Copie a estrutura de um minigame existente: 
+1. Copie a estrutura do SkyWars:
 ```bash
-cp -r minigame-spleef minigame-NOVO
+cp -r minigame-skywars minigame-NOVO
 ```
 
-2. Edite o script de inicialização:
+2. Edite o script de inicialização: 
 ```bash
-nano minigame-NOVO/start-NOVO.sh
-# Altere a porta e o nome
+nano minigame-NOVO/start-NOVO. sh
+# Altere a porta (ex: 5522) e o nome
 ```
 
 3. Torne executável:
@@ -171,15 +179,28 @@ chmod +x minigame-NOVO/start-NOVO.sh
 
 4. Configure o firewall:
 ```bash
-sudo ufw allow PORTA/udp
+sudo ufw allow 5522/udp comment "Hytale NOVO"
 ```
+
+5. Atualize o `scripts/start-all.sh` para incluir o novo servidor
 
 ### Instalar mods
 
-Coloque arquivos `.jar` ou `.zip` na pasta `mods/` do servidor desejado: 
+Coloque arquivos `.jar` ou `.zip` na pasta `mods/` do servidor desejado:
 
 ```bash
 cp meu-mod.jar lobby/mods/
+```
+
+**Dica:** Baixe mods de fontes confiáveis como [CurseForge](https://www.curseforge.com/hytale)
+
+### Transferir jogadores entre servidores
+
+Use a API de Player Referral no seu código Java:
+
+```java
+// No lobby, ao jogador selecionar SkyWars: 
+PlayerRef.referToServer("localhost", 5521, null);
 ```
 
 ## 📊 Monitoramento
@@ -190,8 +211,14 @@ cp meu-mod.jar lobby/mods/
 # Lobby
 tail -f lobby/logs/latest.log
 
-# Spleef
-tail -f minigame-spleef/logs/latest. log
+# SkyWars
+tail -f minigame-skywars/logs/latest.log
+```
+
+### Verificar processos ativos
+
+```bash
+ps aux | grep HytaleServer
 ```
 
 ### Verificar uso de recursos
@@ -205,21 +232,40 @@ htop
 
 | Problema | Solução |
 |----------|---------|
-| "Java não encontrado" | Instale Java 25: `sudo apt install openjdk-25-jdk` |
-| "Porta já em uso" | Altere a porta no script `.sh` |
+| "Java não encontrado" | Instale Java 25: [Adoptium](https://adoptium.net/) |
+| "Porta já em uso" | Altere a porta no script `.sh` com `--bind PORTA` |
 | "Permissão negada" | Execute:  `chmod +x *.sh` |
 | "Assets.zip não encontrado" | Verifique se copiou para `shared/` |
-| "Não consegue conectar" | Verifique firewall:  `sudo ufw status` |
+| "Não consegue conectar" | Verifique firewall: `sudo ufw status` |
+| "Limite de 100 servidores" | Compre licenças adicionais ou aplique para Server Provider |
+| Servidor trava/lento | Reduza `ViewDistance` no config.json para 8-10 chunks |
+
+### Protocolo QUIC
+
+Hytale usa **QUIC sobre UDP**, não TCP. Certifique-se de: 
+
+- Port forwarding configurado para **UDP**, não TCP
+- Firewall liberando **UDP** na porta correta
+- Se usar proxy/load balancer, deve suportar QUIC
 
 ## 📚 Recursos
 
 - [Hytale Server Manual](https://hypixel.com/docs/hytale-server-manual)
-- [Java 25 Download](https://adoptium.net/)
+- [Java 25 Download (Adoptium)](https://adoptium.net/)
 - [Mods para Hytale](https://www.curseforge.com/hytale)
+- [Server Provider Authentication Guide](https://hypixel.com/docs/server-provider-auth)
+
+## 🔐 Segurança
+
+⚠️ **Importante:** Ao transferir jogadores entre servidores com payloads: 
+
+- O cliente pode modificar o payload
+- Sempre use assinatura criptográfica (HMAC) com chave compartilhada
+- Valide payloads no servidor de destino antes de confiar nos dados
 
 ## 📝 Licença
 
-Este projeto é um MVP para fins educacionais. 
+Este projeto é um MVP para fins educacionais.
 
 ## 👤 Autor
 
@@ -228,3 +274,14 @@ Este projeto é um MVP para fins educacionais.
 ---
 
 ⭐ Se este projeto te ajudou, deixe uma star! 
+
+## 🚀 Roadmap
+
+- [x] Servidor Lobby
+- [x] Minigame:  SkyWars
+- [ ] Sistema de fila/matchmaking
+- [ ] Sistema de parties
+- [ ] Minigame:  BedWars
+- [ ] Minigame: The Bridge
+- [ ] Dashboard web com Query plugin
+- [ ] Integração com sistema de pagamentos do Hytale

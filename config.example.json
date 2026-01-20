@@ -1,19 +1,46 @@
 {
-  "ServerName": "Hytale Minigames MVP",
-  "MOTD": "Bem-vindo ao servidor de minigames! ",
+  "ServerName": "Hytale Minigames Server",
+  "MOTD":  "Bem-vindo ao servidor de minigames! | Lobby + SkyWars",
   "MaxPlayers": 100,
   "DefaultWorld": "world",
   "ViewDistance": 12,
-  "Whitelist": false,
+  "Whitelist":  false,
   "OnlineMode": true,
   "Ports": {
     "lobby": 5520,
-    "spleef": 5521,
-    "parkour": 5522
+    "skywars": 5521
   },
   "Memory": {
     "lobby": "2G",
-    "minigames": "1G"
-  }
+    "skywars": "1G"
+  },
+  "Servers": {
+    "lobby": {
+      "host": "localhost",
+      "port": 5520,
+      "memory": "2G",
+      "viewDistance": 12,
+      "description": "Servidor de entrada principal"
+    },
+    "skywars": {
+      "host": "localhost",
+      "port": 5521,
+      "memory": "1G",
+      "viewDistance": 10,
+      "description": "Minigame SkyWars"
+    }
+  },
+  "Features": {
+    "autoBackup": false,
+    "backupFrequency": 30,
+    "sentry": false,
+    "aotCache": true
+  },
+  "Notes": [
+    "ViewDistance padrão (12) equivale a ~24 chunks do Minecraft",
+    "Reduzir ViewDistance para 8-10 economiza RAM significativamente",
+    "Use ViewDistance 10 para minigames (arenas menores)",
+    "Cada servidor precisa autenticação individual na primeira execução",
+    "Hytale usa QUIC sobre UDP - configure firewall corretamente"
+  ]
 }
-
